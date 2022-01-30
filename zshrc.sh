@@ -52,6 +52,7 @@ function update_current_git_vars() {
     fi
      __CURRENT_GIT_STATUS=("${(@s: :)_GIT_STATUS}")
 	GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
+  GIT_BRANCH=`echo $GIT_BRANCH |cut --delimiter=. -f 4- |sed 's/\// => /'`
 	GIT_AHEAD=$__CURRENT_GIT_STATUS[2]
 	GIT_BEHIND=$__CURRENT_GIT_STATUS[3]
 	GIT_STAGED=$__CURRENT_GIT_STATUS[4]

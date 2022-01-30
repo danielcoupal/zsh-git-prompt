@@ -2,7 +2,7 @@ module BranchParse where
 
 import Control.Applicative (liftA, liftA2)
 import Text.Parsec (digit, string, char, eof, anyChar,
-				   many, many1, manyTill, noneOf, between,
+				   many, many1, manyTill, sepBy, noneOf, between,
 				   parse, ParseError, (<|>), try)
 import Text.Parsec.String (Parser)
 import Test.QuickCheck (Arbitrary(arbitrary), oneof, getPositive, suchThat)
@@ -77,9 +77,11 @@ noBranch =
 
 trackedBranch :: Parser Branch
 trackedBranch =
-		do -- Parsec
-			b <- manyTill anyChar (try (string "..."))
-			return (MkBranch b)
+  do -- Parsec
+    -- b <- show (last (many (noneOf " ") `sepBy` "..."))
+    b <- many (noneOf " ")
+    -- b <- manyTill anyChar (try (string "..."))
+    return (MkBranch b)
 
 branchRemoteTracking :: Parser MBranchInfo
 branchRemoteTracking =
