@@ -52,11 +52,11 @@ function update_current_git_vars() {
   fi
   __CURRENT_GIT_STATUS=("${(@s: :)_GIT_STATUS}")
 
-  local='\w+\.{3,}'
-  upstream='(.+)\/'
+  local='(\w|\/)+\.{3,}'
+  upstream='(\w+)\/'
 
   GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
-  GIT_BRANCH=`echo $GIT_BRANCH |sed -E "s/$local$upstream/\1 => /"`
+  GIT_BRANCH=`echo $GIT_BRANCH |sed -E "s/$local$upstream/\2 => /"`
   GIT_AHEAD=$__CURRENT_GIT_STATUS[2]
   GIT_BEHIND=$__CURRENT_GIT_STATUS[3]
   GIT_STAGED=$__CURRENT_GIT_STATUS[4]
