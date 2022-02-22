@@ -52,7 +52,7 @@ function update_current_git_vars() {
   fi
   __CURRENT_GIT_STATUS=("${(@s: :)_GIT_STATUS}")
 
-  local='(\w|\/)+\.{3,}'
+  local='(\w|\/|-)+\.{3,}'
   upstream='(\w+)\/'
 
   GIT_BRANCH=$__CURRENT_GIT_STATUS[1]
